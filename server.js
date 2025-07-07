@@ -1,67 +1,84 @@
 
 
 /******************************************************************************** 
-*  WEB322 – Assignment 03
+*  WEB322 – Assignment 04
 *  
 *  I declare that this assignment is my own work in accordance with Seneca's 
 *  Academic Integrity Policy: 
 *  
 *  https://www.senecapolytechnic.ca/about/policies/academic-integrity-policy.html 
 *  
-*  Name: _____Elshad Humbatli_________________ Student ID: _107143240_____________ Date: _30/05/2025_____________ 
+*  Name: _____Elshad Humbatli_________________ Student ID: _107143240_____________ Date: 06/07/2025_____________
+//i  only did not  know about https://drawdown.org/solutions/<%=encodeURIComponent(project.title)%>  which i learned from the internet
 * 
 ********************************************************************************/ 
+
 const projectData=require("./modules/projects");
 const express=require('express');
 const app=express();
-projectData.initialize();
 
+app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
+app.use(express.static(__dirname + '/public'));
 app.get("/",(req,res)=>{
-res.sendFile(__dirname+"/views/home.html");
+return res.render("home");
 });
 app.get("/about",(req,res)=>{
-    res.sendFile(__dirname+"/views/about.html");
+ return  res.render("about");
 })
-app.get("/solutions/projects",(req,res)=>{
+app.get("/solutions/projects",async(req,res)=>{
     //here i am querying the sector 
-    const sector=req.query.sector;
+    const sector=req.query.sector||'';
     //if it exists
  try{
     if(sector)
  {
-    res.json(projectData.getProjectsBySector(sector));
+  const filtered= await  projectData.getProjectsBySector(sector);
+res.render("projects",{projects:filtered,page:"solutions/projects",sector:sector});
  }
  else
  {
-    res.json(projectData.getAllProjects());
+ const all= await projectData.getAllProjects();
+res.render("projects",{projects:all,page:"solutions/projects",sector:sector});
  }}catch(error)
  {
     console.error(error);
-    res.status(404).send("It  did not fetch");
+ res.status(404).render("404", { message: "Project sector not found.", page:"" });
+    // res.status(404).send("It  did not fetch");
  }
 });
-app.get("/solutions/projects/:id",(req,res)=>
+app.get("/solutions/projects/:id",async (req,res)=>
 {
-const id= req.query.id;
-
-    if(id)
-    {
-        res.json(projectData.getProjectById(id));
+try{
+const id= req.params.id;  
+    const foundID=await  projectData.getProjectById(id);
+if(foundID)
+    res.render("project",{project:foundID});
+else {
+      res.status(404).render("404", { message: "Project not found", page: ""});
     }
-    else{
-        res.status(404).send("it did not fetch");
+}catch(err)
+    {
+        console.log(err);
+ res.status(404).render("404", { message: "Project id not found." , page: ""});
     }
 });
 
 
 app.use((req,res)=>{
-res.status(404).sendFile(__dirname+"/views/404.html");
+res.status(404).render("404",{message:"there is not info about it",page:""});
 });
 const port=8080;
-app.use(express.static(__dirname + '/public'));
-
+projectData.initialize();
 app.listen(port,()=>
 {
     console.log(`app is running in the port ${port}`);
-});
+})
+
+
+
+// const projectData=require("./modules/projects");
+// const express=require('express');
+// const app=express();
+
+// app.set('view engine', 'ejs');

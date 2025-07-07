@@ -1,0 +1,14 @@
+<nav class="bg-white shadow-md p-4">
+    <div class="container mx-auto flex justify-between items-center text-lime-700 font-bold">
+<a class="<%= (page=='/')?'active':''%>" href="/" >Climate Solutions</a>
+<div class="flex items-center space-x-4">
+<!-- <a  href="/about" class="text-gray-800 hover:text-gray-500" >About</a>  -->
+<a class="<%= (page == '/about') ? 'active' : '' %>" href="/about">About</a>    
+<div class="dropdown dropdown-end">
+<a class="<%= (page == "/solutions/projects") ? 'active' : '' %>" href="/solutions/projects">View Projects</a>
+<!-- <label tabindex="0" class="btn m-1"  >Sector</label> -->
+
+    </div>
+</div>    
+</div>
+</nav>

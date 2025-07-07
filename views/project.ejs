@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <title><%=project.title%></title>
+<script>
+document.addEventListener("DOMContentLoaded", async()=>{
+let response=await fetch("https://dummyjson.com/quotes/random");
+let data= await response.json();
+document.getElementById("quote").innerText=`"${data.quote}" — ${data.author}`;
+});
+</script>
+</head>
+<body>
+
+<%-include('partials/navbar',{page:''})%>
+<div class=" text-center my-8 px-4 ">
+  <h1 class="text-3xl font-bold "><%=project.title%></h1>
+  <p class="text-2xl fond-medium">Below, you will find detailed information about the project:<%=project.title%></p>
+</div>
+<div class="container mx-auto  px-4 ">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
+    <div>
+      <img src="<%= project.feature_img_url %>" alt="Project image" class="w-full rounded-lg object-cover" />
+    </div>
+<div class="space-y-4 ">
+      <p><%= project.intro_short %></p>
+<br>
+<br>
+      <div>
+        <span class="font-bold">Impact:</span>
+        <p class="mt-2"><%= project.impact %></p>
+      </div>
+    <em>More Information</em>
+
+<br>
+<a href="https://drawdown.org/solutions/<%=project.title%>" target="_blank">https://drawdown.org/solutions/<%=encodeURIComponent(project.title)%></a>
+  <p id="quote" class="text-right font-serif italic gap-4 mt-4"></p>
+<a href="#" onclick="history.back(); return false;" class=" text-right btn btn-primary">
+  Return
+</a>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

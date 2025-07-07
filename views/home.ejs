@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Climate Solutions</title>
+</head>
+<body>
+<%-include('partials/navbar',{page:'/'})%>
+   <div class="container mx-auto px-4 py-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  
+    <div class="hero h-80 rounded-lg" style="background-image: url(https://drawdown.org/sites/default/files/solutions/solution_biomass01.jpg);">
+      <div class="hero-overlay bg-opacity-60 rounded-lg"></div>
+      <div class="hero-content text-center text-neutral-content">
+        <div class="max-w-md">
+          <h1 class="text-2xl font-bold">Electricity</h1>
+          <p class="py-2 text-sm">Clean energy and solar projects.</p>
+          <a href="/solutions/projects?sector=Electricity" class="btn btn-sm btn-primary">Explore</a>
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="hero h-80 rounded-lg" style="background-image: url(https://drawdown.org/sites/default/files/solutions2020/solution_bicycle_infrastructure.jpg);">
+      <div class="hero-overlay bg-opacity-60 rounded-lg"></div>
+      <div class="hero-content text-center text-neutral-content">
+        <div class="max-w-md">
+          <h1 class="text-2xl font-bold">Transportation</h1>
+          <p class="py-2 text-sm">Sustainable transit solutions.</p>
+          <a href="/solutions/projects?sector=Transportation" class="btn btn-sm btn-primary">Explore</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero h-80 rounded-lg" style="background-image: url(https://drawdown.org/sites/default/files/solutions2020/solution_alternativecement02.jpg);">
+      <div class="hero-overlay bg-opacity-60 rounded-lg"></div>
+      <div class="hero-content text-center text-neutral-content">
+        <div class="max-w-md">
+          <h1 class="text-2xl font-bold">Industry</h1>
+          <p class="py-2 text-sm">Energy-efficient infrastructure.</p>
+          <a href="/solutions/projects?sector=Industry" class="btn btn-sm btn-primary">Explore</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <title>Projects</title>
+</head>
+<body class="bg-base-100">
+
+<%-include('partials/navbar',{page:'solutions/projects'})%>
+<div class="text-center">
+<h1 class="text-5xl font-extrabold text-gray-50">Projects</h1>
+<div class="mt-4 space-x-3">
+<p class="text-lime-100 font-bold ">You can look deeply our database by choosing the sector</p>
+
+<div class="flex justify-center space-x-8 mt-5">
+<a href="/solutions/projects?sector=Industry" class="font-bold hover:text-white <%= sector === 'Industry' ? 'text-white underline' : 'text-lime-300' %>"  >Industry</a>
+<a href="/solutions/projects?sector=Transportation"class="font-bold hover:text-white <%= sector === 'Transportation' ? 'text-white underline' : 'text-lime-300' %>">Transportation</a>
+<a href="/solutions/projects?sector=Electricity" class="font-bold hover:text-white <%= sector === 'Electricity' ? 'text-white underline' : 'text-lime-300' %>">Electricity</a>
+</div>
+
+</div>
+</div>
+
+<div class="overflow-x-auto">
+<table class="table">
+<thead>
+<tr>
+<th>Title</th>
+<th>Sector</th>
+<th>Description</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<%projects.forEach(project=>{ %>
+<tr>
+<td><%=project.title %></td>
+<td><a href="/solutions/projects?sector=<%= project.sector %>" class="btn btn-sm">
+  <%= project.sector %>
+</a></td>
+<td><%=project.summary_short%></td>
+<td><a href="/solutions/projects/<%=project.id%>" class="btn btn-sm">Details</a></td>
+</tr>
+<%})%> 
+</tbody>
+</table>
+</div>
+
+</body>
+</html>
